@@ -215,9 +215,6 @@ set $ws9 "9"
 set $ws10 "10"
 
 
-
-
-
 #############################################
 # autostart applications/services on login: #
 #############################################
@@ -319,7 +316,7 @@ for_window [class="safenet"] move position center
 
 # Floating terminal
 for_window [title="floaterm"] floating Enabled
-for_window [title="floaterm"] border pixel 1
+for_window [title="floaterm"] border pixel 2
 for_window [title="floaterm"] move scratchpad
 for_window [title="floaterm"] resize set 1200 600
 
@@ -329,9 +326,6 @@ for_window [title="rest"] border pixel 1
 for_window [title="rest--api"] move scratchpad
 # for_window [class="rest--api"] scratchpad show
 for_window [title="rest--api"] resize set 1200 600
-
-
-
 
 
 ######################################
@@ -352,45 +346,21 @@ set $inactive-bg-color #2A2A2A
 set $text-color #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color #E53935
-set $grey #A2A2A2
+set $grey #545454
 set $white #ffffff
 set $black #000000
 set $dark-blue #1C639A
-set $light-blue #5482d6
+set $light-blue #9acdfc
 
 # define colors for windows:
 client.focused  $bg-color $light-blue $text-color $dark-blue
-client.unfocused  $inactive-bg-color $inactive-bg-color $white $grey
+client.unfocused  $inactive-bg-color $grey $white $grey
 client.focused_inactive  $inactive-bg-color $inactive-bg-color $inactive-text-color $grey 
 client.urgent  $urgent-bg-color $urgent-bg-color $text-color $grey 
-
-
-
 
 ############################################
 # bar settings (input comes from i3blocks) #
 ############################################
-
-# bar {
-#
-# # font pango: Noto Sans Regular 12
-#   font pango: Hack Nerd Font 11
-#
-#     # position top
-#
-#     # status_command i3blocks -c ~/.config/i3/i3blocks.conf
-#     status_command i3status
-#
-#     colors {
-#       background $black
-# #            border 	      bg 		  txt 	indicator
-#         focused_workspace  #26ffdb #26ffdb #000000
-#         active_workspace   #333333 #333333 #888888
-#         inactive_workspace #333333 #333333 #f1f1f1
-#         urgent_workspace   #FF5555 #FF5555 #F8F8F2
-#         binding_mode       $white	 $white	 $black
-#     }
-# }
 
 bar {
     font pango: Hack Nerd Font 11
@@ -399,11 +369,11 @@ bar {
     colors {
         separator #666666
         background #222222
-        statusline #dddddd
-        focused_workspace #0088CC #0088CC #ffffff
+        statusline #000000
+        focused_workspace #222222 #9acdfc #222222
         active_workspace #333333 #333333 #ffffff
         inactive_workspace #333333 #333333 #888888
-        urgent_workspace #2f343a #900000 #ffffff
+        urgent_workspace #222222 #222222 #ffffff
     }
 }
 
