@@ -7,6 +7,8 @@ font pango:Hack Nerd Font 0
 # set the mod key to the winkey:
 set $mod Mod4 
 
+set $wallpaper /home/$USER/dotfiles2/i3wm/wallpapers/roaring-sea.png
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -93,7 +95,7 @@ bindsym $mod+F1 [class="safenet"] scratchpad show; [class="safenet"] move positi
 bindsym $mod+shift+q kill
 
 # lock with a picturek
-bindsym $mod+shift+o exec --no-startup-id i3lock -e -i /home/$USER/dotfiles/images/ENDY-planet.png
+bindsym $mod+shift+o exec --no-startup-id i3lock -e -i $wallpaper
 # lock by blurring the screen:
 # bindsym $mod+shift+o exec --no-startup-id ~/.config/i3/scripts/blur-lock
 
@@ -237,9 +239,6 @@ exec --no-startup-id xinput set-prop "DLL077C:00 06CB:7E92 Touchpad" "libinput N
 # Focus after Tapping
 focus_follows_mouse no
 
-# lock after suspend
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -n -e -i /home/$USER/dotfiles/images/wl.png
-
 # networkmanager-applet
 exec --no-startup-id nm-applet
 
@@ -247,15 +246,23 @@ exec --no-startup-id nm-applet
 exec --no-startup-id numlockx on
 
 # set wallpaper
-exec --no-startup-id sleep 1 && feh --bg-fill /home/$USER/dotfiles/images/wl.png 
-
-# set powersavings for display:
-exec --no-startup-id xset 300 dpms 600 600 600
+exec --no-startup-id sleep 1 && feh --bg-fill $wallpaper
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
 # exec --no-startup-id dex --autostart --environment i3
+
+# lock after suspend
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -n -e -i $wallpaper
+
+# set powersavings for display:
+exec --no-startup-id xset s noblank
+exec --no-startup-id xset dpms 20 20 20
+
+# use xautolock to use autosuspend rules for mobile devices
+# https://wiki.archlinux.org/title/Session_lock#xautolock
+exec --no-startup-id xautolock -time 1 -locker "systemctl suspend"
 
 # start blueberry app for managing bluetooth devices from tray:
 # exec --no-startup-id blueberry-tray
@@ -266,12 +273,6 @@ exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
 # disable power saving (for example if using xscreensaver)
 #exec --no-startup-id xset -dpms
 
-# use xautolock to use autosuspend rules for mobile devices
-# https://wiki.archlinux.org/title/Session_lock#xautolock
-#exec --no-startup-id xautolock -time 60 -locker "systemctl suspend"
-
-# polybar
-# exec --no-startup-id polybar
 
 # auto layout
 # exec --no-startup-id /home/$USER/.config/i3/scripts/auto-layout/auto-layout
