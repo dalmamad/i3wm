@@ -231,7 +231,7 @@ exec --no-startup-id xkb-switch --i3
 exec --no-startup-id xinput --set-prop 12 'libinput Accel Speed' -0.9
 
 # notify on low battery
-exec --no-startup-id /home/$USER/.config/i3/scripts/i3-battery-popup
+exec --no-startup-id /home/$USER/.config/i3/scripts/i3-battery-popup -L 20
 
 # Add Natural Scrolling in Touchpad
 exec --no-startup-id xinput set-prop "DLL077C:00 06CB:7E92 Touchpad" "libinput Natural Scrolling Enabled" 1
@@ -239,8 +239,6 @@ exec --no-startup-id xinput set-prop "DLL077C:00 06CB:7E92 Touchpad" "libinput N
 # Focus after Tapping
 focus_follows_mouse no
 
-# networkmanager-applet
-exec --no-startup-id nm-applet
 
 # num lock activated
 exec --no-startup-id numlockx on
@@ -250,19 +248,21 @@ exec --no-startup-id sleep 1 && feh --bg-fill $wallpaper
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
-# exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id dunst --config ~/.config/dunst/dunstrc
+
+# networkmanager-applet
+exec --no-startup-id nm-applet
 
 # lock after suspend
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -n -e -i $wallpaper
 
 # set powersavings for display:
 exec --no-startup-id xset s noblank
-exec --no-startup-id xset dpms 20 20 20
+exec --no-startup-id xset dpms 250 250 250
 
 # use xautolock to use autosuspend rules for mobile devices
 # https://wiki.archlinux.org/title/Session_lock#xautolock
-exec --no-startup-id xautolock -time 1 -locker "systemctl suspend"
+exec --no-startup-id xautolock -time 5 -locker "systemctl suspend"
 
 # start blueberry app for managing bluetooth devices from tray:
 # exec --no-startup-id blueberry-tray
