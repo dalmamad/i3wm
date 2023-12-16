@@ -259,11 +259,11 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -n -e -i $wallpape
 
 # set powersavings for display:
 exec --no-startup-id xset s noblank
-exec --no-startup-id xset dpms 250 250 250
+exec --no-startup-id xset dpms 400 400 400
 
 # use xautolock to use autosuspend rules for mobile devices
 # https://wiki.archlinux.org/title/Session_lock#xautolock
-exec --no-startup-id xautolock -time 5 -locker "systemctl suspend"
+exec --no-startup-id xautolock -time 8 -locker "systemctl suspend"
 
 # start blueberry app for managing bluetooth devices from tray:
 # exec --no-startup-id blueberry-tray
