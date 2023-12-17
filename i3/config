@@ -234,9 +234,6 @@ exec --no-startup-id xinput --set-prop 12 'libinput Accel Speed' -0.9
 # notify on low battery
 exec --no-startup-id /home/$USER/.config/i3/scripts/i3-battery-popup -L 20
 
-# Add Natural Scrolling in Touchpad
-exec --no-startup-id xinput set-prop "DLL077C:00 06CB:7E92 Touchpad" "libinput Natural Scrolling Enabled" 1
-
 # Focus after Tapping
 focus_follows_mouse no
 
