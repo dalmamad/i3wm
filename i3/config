@@ -97,8 +97,6 @@ bindsym $mod+shift+q kill
 
 # lock with a picturek
 bindsym $mod+shift+o exec --no-startup-id i3lock -e -i $wallpaper
-# lock by blurring the screen:
-# bindsym $mod+shift+o exec --no-startup-id ~/.config/i3/scripts/blur-lock
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -159,9 +157,6 @@ bindsym $mod+a focus parent
 
 # focus the child container
 bindsym $mod+c focus child
-
-# open new empty workspace
-bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/empty_workspace
 
 # changing keyboard layout
 bindsym Mod1+space exec --no-startup-id xkb-switch -n
