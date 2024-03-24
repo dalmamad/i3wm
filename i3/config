@@ -17,7 +17,7 @@ floating_modifier $mod
 workspace_layout default
 
 # Set inner/outer gaps
-gaps inner 4
+gaps inner 0
 gaps outer 0
 
 ######################################
@@ -109,10 +109,12 @@ bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
 
 # change focus
-bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
+bindsym $mod+h focus left
+bindsym $mod+Shift+Tab focus left
 bindsym $mod+l focus right
+bindsym $mod+Tab focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -150,7 +152,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+m floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+Tab focus mode_toggle
+bindsym $mod+z focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -159,12 +161,14 @@ bindsym $mod+a focus parent
 bindsym $mod+c focus child
 
 # changing keyboard layout
-bindsym Mod1+space exec --no-startup-id xkb-switch -n
+bindsym Mod1+space exec --no-startup-id ~/.config/i3/scripts/layout-switch
+
+# bindsym Mod1+space exec --no-startup-id xkb-switch -n
 
 # volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioMute exec --no-startup-id amixer sset Master toggle && killall -USR1 i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
 #temp volume
 bindsym $mod+F6 exec --no-startup-id amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks

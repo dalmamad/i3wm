@@ -1,0 +1,16 @@
+#! /bin/bash
+
+layouts=us,ir
+
+output=$(xkb-switch -l)
+num_lines=$(echo "$output" | wc -l)
+
+if [ $num_lines -eq 1 ]; then
+  setxkbmap -layout $layouts
+  if echo "$output" | grep -q "us"; then
+    xkb-switch -n
+  fi
+else
+  xkb-switch -n
+fi
+

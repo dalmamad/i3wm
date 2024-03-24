@@ -7,6 +7,6 @@ setxkbmap -layout us,ir
 # xinput set-prop "DLL077C:00 06CB:7E92 Touchpad" "libinput Natural Scrolling Enabled" 1
 
 
-#env variables
+# env variables
 BROWSER=brave
 EDITOR=nvim
