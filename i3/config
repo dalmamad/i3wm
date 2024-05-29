@@ -82,12 +82,13 @@ bindsym $mod+F10 mode "sct: [d]efault, [m]id, [h]igh"
 
 # start a terminal
 bindsym $mod+Return exec --no-startup-id alacritty -o font.size=10
+# bindsym $mod+Return exec --no-startup-id "tmux has-session -t default && alacritty -o font.size=10 -e tmux attach -t default || alacritty -o font.size=10 -e tmux new -s default"
 
 # floaterm
 bindsym $mod+t exec --no-startup-id /home/$USER/.config/i3/scripts/floaterm
 
-# rest-api
-bindsym $mod+r exec --no-startup-id /home/$USER/.config/i3/scripts/rest-api
+# rest-nvim
+bindsym $mod+r exec --no-startup-id /home/$USER/.config/i3/scripts/rest-nvim
 
 #safenet
 bindsym $mod+F1 [class="safenet"] scratchpad show; [class="safenet"] move position center
@@ -95,7 +96,7 @@ bindsym $mod+F1 [class="safenet"] scratchpad show; [class="safenet"] move positi
 # kill focused window
 bindsym $mod+shift+q kill
 
-# lock with a picturek
+# lock with a Picture
 bindsym $mod+shift+o exec --no-startup-id i3lock -e -i $wallpaper
 
 # reload the configuration file
@@ -228,7 +229,7 @@ exec --no-startup-id picom
 exec --no-startup-id xkb-switch --i3
 
 #mouse speed
-exec --no-startup-id xinput --set-prop 12 'libinput Accel Speed' -0.9
+exec --no-startup-id xinput --set-prop 12 'libinput Accel Speed' 0
 
 # notify on low battery
 exec --no-startup-id /home/$USER/.config/i3/scripts/i3-battery-popup -L 20
@@ -255,13 +256,16 @@ exec --no-startup-id nm-applet
 # lock after suspend
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -n -e -i $wallpaper
 
+
+exec --no-startup-id xfce4-power-manager
+
 # set powersavings for display:
-exec --no-startup-id xset s noblank
-exec --no-startup-id xset dpms 400 400 400
+# exec --no-startup-id xset s noblank
+# exec --no-startup-id xset dpms 400 400 400
 
 # use xautolock to use autosuspend rules for mobile devices
 # https://wiki.archlinux.org/title/Session_lock#xautolock
-exec --no-startup-id xautolock -time 8 -locker "systemctl suspend"
+# exec --no-startup-id xautolock -time 8 -locker "systemctl suspend"
 
 # start blueberry app for managing bluetooth devices from tray:
 # exec --no-startup-id blueberry-tray
@@ -315,17 +319,20 @@ for_window [class="safenet"] move position center
 
 
 # Floating terminal
-for_window [title="floaterm"] floating Enabled
-for_window [title="floaterm"] border pixel 2
-for_window [title="floaterm"] move scratchpad
-for_window [title="floaterm"] resize set 1200 600
+for_window [class="floaterm"] floating Enabled
+for_window [class="floaterm"] move scratchpad
+for_window [class="floaterm"] border pixel 2
+for_window [class="floaterm"] scratchpad show
+for_window [class="floaterm"] resize set 1200 600
+for_window [class="floaterm"] move position center
 
-# rest-api terminal
-for_window [title="rest--api"] floating Enabled
-for_window [title="rest"] border pixel 1
-for_window [title="rest--api"] move scratchpad
-# for_window [class="rest--api"] scratchpad show
-for_window [title="rest--api"] resize set 1200 600
+# rest-nvim terminal
+for_window [class="rest-nvim"] floating Enabled
+for_window [class="rest-nvim"] move scratchpad
+for_window [class="rest-nvim"] border pixel 2
+for_window [class="rest-nvim"] scratchpad show
+for_window [class="rest-nvim"] resize set 1200 600
+for_window [class="rest-nvim"] move position center
 
 
 ######################################

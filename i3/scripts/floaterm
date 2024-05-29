@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 
-floaterm_win=$(xdotool search --name floater)
+floaterm_win=$(xdotool search --class floaterm)
 
 if [ -z $floaterm_win ]
 then
-  alacritty -o font.size=10 -t floaterm &
-  sleep 0.2
-  i3-msg [title="floaterm"] scratchpad show
-  i3-msg [title="floaterm"] move position center
+  tmux has-session -t default && alacritty -o font.size=10 --class floaterm -e tmux attach -t default || alacritty -o font.size=10 --class floaterm -e tmux new -s default &
 else
-  i3-msg [title="floaterm"] scratchpad show
-  i3-msg [title="floaterm"] move position center
+  i3-msg \[class="floaterm"\] scratchpad show
+  i3-msg \[class="floaterm"\] move position center
 fi
 
 

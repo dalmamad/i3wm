@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+rest_win=$(xdotool search --class rest-nvim)
+if [ -z $rest_win ]
+then
+  alacritty -o font.size=10 --class rest-nvim -e nvim /home/$USER/rest-nvim &
+else
+  i3-msg \[class="rest-nvim"\] scratchpad show
+  i3-msg \[class="rest-nvim"\] move position center
+fi
+
+
