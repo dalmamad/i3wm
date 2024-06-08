@@ -1,28 +1,18 @@
-#######################
-# config starts here: #
-#######################
+######################
+# config starts here #
+######################
 
-font pango:Hack Nerd Font 0
-
-# set the mod key to the winkey:
-set $mod Mod4 
-
-#set wallpaper location
-set $wallpaper /home/$USER/dotfiles/i3wm/wallpapers/boy-on-camel.png
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-# default i3 tiling mode:
-workspace_layout default
-
-# Set inner/outer gaps
-gaps inner 0
-gaps outer 0
+font pango:Hack Nerd Font 9
 
 ######################################
 #           keybindings              #
 ######################################
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# set the mod key to the winkey:
+set $mod Mod4 
 
 # switch to workspace
 bindsym $mod+1    workspace  $ws1
@@ -54,31 +44,14 @@ bindsym $mod+Control+j resize grow height 10 px or 10 ppt
 bindsym $mod+Control+k resize shrink height 10 px or 10 ppt
 bindsym $mod+Control+l resize grow width 10 px or 10 ppt
 
-# exit mode
-mode "exit: [l]ogout, [r]eboot, [s]hutdown, s[u]spend" {
-  bindsym l exec i3-msg exit
-    bindsym r exec systemctl reboot
-    bindsym s exec systemctl poweroff
-    bindsym u exec --no-startup-id systemctl suspend ,mode "default"
-    bindsym Escape mode "default"
-    bindsym Return mode "default"
-}
-bindsym $mod+Shift+e mode "exit: [l]ogout, [r]eboot, [s]hutdown, s[u]spend"
+bindsym $mod+b move scratchpad
+bindsym $mod+shift+b scratchpad show
 
-# exit-menu
-bindsym $mod+Shift+x exec --no-startup-id ~/.config/i3/scripts/powermenu
-
-# change screen temprature
-exec --no-startup-id sct 4500, mode "default"
-mode "sct: [d]efault, [m]id, [h]igh" {
-  bindsym d exec --no-startup-id sct, mode "default"
-    bindsym m exec --no-startup-id sct 4500, mode "default"
-    bindsym h exec --no-startup-id sct 3000, mode "default"
-    bindsym Escape mode "default"
-    bindsym Return mode "default"
-}
-bindsym $mod+F10 mode "sct: [d]efault, [m]id, [h]igh"
-
+# Rofi
+bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun \
+          -config ~/.config/rofi/rofidmenu.rasi
+bindsym $mod+u exec rofi -show window \
+          -config ~/.config/rofi/rofidmenu.rasi
 
 # start a terminal
 bindsym $mod+Return exec --no-startup-id alacritty -o font.size=10
@@ -91,7 +64,7 @@ bindsym $mod+t exec --no-startup-id /home/$USER/.config/i3/scripts/floaterm
 bindsym $mod+r exec --no-startup-id /home/$USER/.config/i3/scripts/rest-nvim
 
 #safenet
-bindsym $mod+F1 [class="safenet"] scratchpad show; [class="safenet"] move position center
+# bindsym $mod+shift+s [class="safenet"] scratchpad show; [class="safenet"] move position center
 
 # kill focused window
 bindsym $mod+shift+q kill
@@ -106,8 +79,12 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Backlight control
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
+# bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
+# bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
+
+# Brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +50
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 50-
 
 # change focus
 bindsym $mod+j focus down
@@ -201,6 +178,31 @@ bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewi
 # Power Profiles menu switcher (rofi)
 bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
 
+# exit mode
+mode "exit: [l]ogout, [r]eboot, [s]hutdown, s[u]spend" {
+  bindsym l exec i3-msg exit
+    bindsym r exec systemctl reboot
+    bindsym s exec systemctl poweroff
+    bindsym u exec --no-startup-id systemctl suspend ,mode "default"
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+bindsym $mod+Shift+e mode "exit: [l]ogout, [r]eboot, [s]hutdown, s[u]spend"
+
+# exit-menu
+bindsym $mod+Shift+x exec --no-startup-id ~/.config/i3/scripts/powermenu
+
+# change screen temprature
+exec --no-startup-id sct 4500, mode "default"
+mode "sct: [d]efault, [m]id, [h]igh" {
+  bindsym d exec --no-startup-id sct, mode "default"
+    bindsym m exec --no-startup-id sct 4500, mode "default"
+    bindsym h exec --no-startup-id sct 3000, mode "default"
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+bindsym $mod+F10 mode "sct: [d]efault, [m]id, [h]igh"
+
 ##########################################
 # configuration for workspace behaviour: #
 ##########################################
@@ -217,10 +219,15 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-
 #############################################
 # autostart applications/services on login: #
 #############################################
+
+#set wallpaper location
+set $wallpaper /home/$USER/dotfiles/i3wm/wallpapers/boy-on-camel.png
+
+# set wallpaper
+exec --no-startup-id sleep 1 && feh --bg-fill $wallpaper
 
 # add picom compositor
 exec --no-startup-id picom
@@ -232,7 +239,7 @@ exec --no-startup-id xkb-switch --i3
 exec --no-startup-id xinput --set-prop 12 'libinput Accel Speed' 0
 
 # notify on low battery
-exec --no-startup-id /home/$USER/.config/i3/scripts/i3-battery-popup -L 20
+# exec --no-startup-id /home/$USER/.config/i3/scripts/i3-battery-popup -L 20
 
 # Add Natural Scrolling in Touchpad
 exec --no-startup-id xinput set-prop "DLL077C:00 06CB:7E92 Touchpad" "libinput Natural Scrolling Enabled" 1
@@ -243,10 +250,7 @@ focus_follows_mouse no
 # num lock activated
 exec --no-startup-id numlockx on
 
-# set wallpaper
-exec --no-startup-id sleep 1 && feh --bg-fill $wallpaper
-
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 
 exec --no-startup-id dunst --config ~/.config/dunst/dunstrc
 
@@ -289,9 +293,16 @@ exec --no-startup-id xfce4-power-manager
 # alternative if you installed aside with XFCE4:
 # exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
-##################
+################
 # window rules #
-##################
+################
+
+# default i3 tiling mode:
+workspace_layout default
+
+# Set inner/outer gaps
+gaps inner 0
+gaps outer 0
 
 # set floating (nontiling) for apps needing it
 for_window [class="Yad" instance="yad"] floating enable
@@ -312,11 +323,10 @@ for_window [class="^.*"] border pixel 3
 
 # safenet
 for_window [class="safenet"] floating Enable
-for_window [class="safenet"] move scratchpad
 for_window [class="safenet"] border pixel 2
-for_window [class="safenet"] scratchpad show
-for_window [class="safenet"] move position center
-
+# for_window [class="safenet"] move scratchpad
+# for_window [class="safenet"] scratchpad show
+# for_window [class="safenet"] move position center
 
 # Floating terminal
 for_window [class="floaterm"] floating Enabled
@@ -360,14 +370,10 @@ set $dark-blue #1C639A
 set $light-blue #9acdfc
 
 # define colors for windows:
-client.focused  $bg-color $light-blue $text-color $dark-blue
+client.focused  $bg-color $light-blue $black $dark-blue
 client.unfocused  $inactive-bg-color $grey $white $grey
 client.focused_inactive  $inactive-bg-color $inactive-bg-color $inactive-text-color $grey 
 client.urgent  $urgent-bg-color $urgent-bg-color $text-color $grey 
-
-############################################
-# bar settings (input comes from i3blocks) #
-############################################
 
 bar {
     font pango: Hack Nerd Font 11
@@ -383,15 +389,3 @@ bar {
         urgent_workspace #222222 #222222 #ffffff
     }
 }
-
-
-
-#####################################
-# Application menu handled by rofi: #
-#####################################
-
-bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun \
-          -config ~/.config/rofi/rofidmenu.rasi
-
-bindsym $mod+u exec rofi -show window \
-          -config ~/.config/rofi/rofidmenu.rasi
