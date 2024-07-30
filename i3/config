@@ -70,7 +70,7 @@ bindsym $mod+r exec --no-startup-id /home/$USER/.config/i3/scripts/rest-nvim
 bindsym $mod+shift+q kill
 
 # lock with a Picture
-bindsym $mod+shift+o exec --no-startup-id i3lock -e -i $wallpaper
+bindsym $mod+shift+o exec --no-startup-id i3lock -e -i $WALLPAPER
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -224,10 +224,10 @@ set $ws10 "10"
 #############################################
 
 #set wallpaper location
-set $wallpaper /home/$USER/dotfiles/i3wm/wallpapers/boy-on-camel.png
+# set $wallpaper /home/$USER/dotfiles/i3wm/wallpapers/boy-on-camel.png
 
 # set wallpaper
-exec --no-startup-id sleep 1 && feh --bg-fill $wallpaper
+exec --no-startup-id sleep 1 && feh --bg-fill $WALLPAPER
 
 # add picom compositor
 exec --no-startup-id picom
@@ -258,8 +258,7 @@ exec --no-startup-id dunst --config ~/.config/dunst/dunstrc
 exec --no-startup-id nm-applet
 
 # lock after suspend
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -n -e -i $wallpaper
-
+exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/$USER/.config/i3/scripts/lock-on-suspend
 
 exec --no-startup-id xfce4-power-manager
 

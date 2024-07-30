@@ -1,0 +1,4 @@
+- fixing xfce powermanager lock problem
+- enhancing the lang-layout script in a way that it can be useful for every language
+- use relative path for the scripts instead of /home/mamad/i3....
+- in lock-suspend script link the wallpaper path to $wallpaper in i3 config file somehow
