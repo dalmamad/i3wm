@@ -3,7 +3,7 @@
 xkb-switch -s us
 
 #it is better to take the wallpaper from i3 $wallpaper somehow
-i3lock -n -e -i $WALLPAPER
+$LOCKER
 
 
 

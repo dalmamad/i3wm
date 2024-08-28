@@ -11,3 +11,5 @@ setxkbmap -layout us,ir
 export BROWSER=brave
 export EDITOR=nvim
 export WALLPAPER=/home/$USER/dotfiles/i3wm/wallpapers/boy-on-camel.png
+export LOCKER="betterlockscreen --lock"
+

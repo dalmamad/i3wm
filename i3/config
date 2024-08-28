@@ -70,7 +70,7 @@ bindsym $mod+r exec --no-startup-id /home/$USER/.config/i3/scripts/rest-nvim
 bindsym $mod+shift+q kill
 
 # lock with a Picture
-bindsym $mod+shift+o exec --no-startup-id i3lock -e -i $WALLPAPER
+bindsym $mod+shift+o exec --no-startup-id $LOCKER
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -261,6 +261,8 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/$USER/.config/i3/scripts/lock-on-suspend
 
 exec --no-startup-id xfce4-power-manager
+exec --no-startup-id xfconf-query --create -c xfce4-session -p /general/LockCommand -t string -s "$LOCKER"
+
 
 # set powersavings for display:
 # exec --no-startup-id xset s noblank
