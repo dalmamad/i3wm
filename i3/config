@@ -53,6 +53,9 @@ bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun \
 bindsym $mod+u exec rofi -show window \
           -config ~/.config/rofi/rofidmenu.rasi
 
+bindsym $mod+c exec rofi -modi "clipboard:greenclip print" \
+          -show clipboard -run-command '{cmd}' \
+          -config ~/.config/rofi/rofidmenu.rasi
 # start a terminal
 bindsym $mod+Return exec --no-startup-id alacritty -o font.size=10
 # bindsym $mod+Return exec --no-startup-id "tmux has-session -t default && alacritty -o font.size=10 -e tmux attach -t default || alacritty -o font.size=10 -e tmux new -s default"
@@ -136,7 +139,7 @@ bindsym $mod+z focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-bindsym $mod+c focus child
+bindsym $mod+shift+a focus child
 
 # changing keyboard layout
 bindsym Mod1+space exec --no-startup-id ~/.config/i3/scripts/layout-switch
@@ -249,6 +252,9 @@ focus_follows_mouse no
 
 # num lock activated
 exec --no-startup-id numlockx on
+
+# clipboard history
+exec --no-startup-id greenclip daemon
 
 exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 
