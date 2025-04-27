@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+DEFAULT_OUTPUT=$(xrandr --query | grep -E ' connected.*primary' | awk '{ print $1}')
+
+external=$(xrandr --query \
+    | grep " connected" \
+    | awk -v def="$DEFAULT_OUTPUT" '$1 != def { print $1 }' \
+    | head -n1)
+
+echo $external
+
+if [ -n "$external" ]; then
+    # External found: turn off default, turn on external at preferred mode
+    xrandr --output "$DEFAULT_OUTPUT" --off \
+           --output "$external" --auto --primary
+    notify-send "Monitor Switched" "Using external monitor: $external"
+else
+    # No external: ensure default is on
+    xrandr --output "$DEFAULT_OUTPUT" --auto --primary
+    notify-send "Monitor Switched" "Using built-in display: $DEFAULT_OUTPUT"
+fi

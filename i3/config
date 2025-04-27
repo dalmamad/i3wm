@@ -181,6 +181,9 @@ bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewi
 # Power Profiles menu switcher (rofi)
 bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
 
+# switch Monitor
+bindsym $mod+Shift+m exec --no-startup-id ~/.config/i3/scripts/switch-monitor
+
 # exit mode
 mode "exit: [l]ogout, [r]eboot, [s]hutdown, s[u]spend" {
   bindsym l exec i3-msg exit
