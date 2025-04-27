@@ -12,4 +12,4 @@ export BROWSER=brave
 export EDITOR=nvim
 export WALLPAPER=/home/$USER/Wallpapers/boy-on-camel.png
 export LOCKER="betterlockscreen --lock"
-
+export GTK_THEME=Adwaita:dark
