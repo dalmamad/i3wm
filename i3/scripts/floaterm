@@ -1,13 +1,21 @@
 #!/usr/bin/env bash
 
 floaterm_win=$(xdotool search --class floaterm)
+fullscreen_status=$(i3-msg -t get_tree | jq 'recurse(.nodes[]?, .floating_nodes[]?) | select(.window_properties?.class == "floaterm") | .fullscreen_mode')
 
 if [ -z $floaterm_win ]
 then
   tmux has-session -t default && alacritty -o font.size=10 --class floaterm -e tmux attach -t default || alacritty -o font.size=10 --class floaterm -e tmux new -s default &
 else
-  i3-msg \[class="floaterm"\] scratchpad show
-  i3-msg \[class="floaterm"\] move position center
+
+  if [ "$fullscreen_status" == "1" ]; then
+    i3-msg \[class="floaterm"\] scratchpad show
+    i3-msg \[class="floaterm"\] move position center
+    i3-msg \[class="floaterm"\] fullscreen enable
+  else [ "$fullscreen_status" == "0" ]; 
+    i3-msg \[class="floaterm"\] scratchpad show
+    i3-msg \[class="floaterm"\] move position center
+  fi
 fi
 
 
