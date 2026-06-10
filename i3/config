@@ -165,8 +165,8 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym $mod+p exec --no-startup-id /usr/local/bin/switch-audio-port
 
 ## App shortcuts
-bindsym $mod+o exec --no-startup-id $BROWSER
-bindsym $mod+i exec --no-startup-id /usr/bin/thunar
+# bindsym $mod+o exec --no-startup-id $BROWSER
+# bindsym $mod+i exec --no-startup-id /usr/bin/thunar
 bindsym $mod+n exec --no-startup-id alacritty  -o font.size=9 -e $EDITOR
 
 # Screenshots

@@ -11,6 +11,9 @@ configuration {
     scroll-method:       0;
     disable-history:     false;
     sidebar-mode:        false;
+    matching: "prefix";
+    drun-match-fields: "name";
+    tokenize: true;
 
     kb-mode-complete: "";
     kb-remove-char-back: "BackSpace,Shift+BackSpace";
