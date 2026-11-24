@@ -13,11 +13,11 @@ icons = "awesome4"
 bat = ["|E|", "|_|", "|=|", "|F|"]
 bat_charging = "|^|"
 
-[[block]]
-block = "battery"
-format = " [$icon $percentage] "
-device = "DisplayDevice"
-driver = "upower"
+#[[block]]
+#block = "battery"
+#format = " [$icon $percentage] "
+#device = "DisplayDevice"
+#driver = "upower"
 
 [[block]]
 block = "cpu"

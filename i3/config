@@ -61,7 +61,7 @@ bindsym $mod+Return exec --no-startup-id alacritty -o font.size=10
 # bindsym $mod+Return exec --no-startup-id "tmux has-session -t default && alacritty -o font.size=10 -e tmux attach -t default || alacritty -o font.size=10 -e tmux new -s default"
 
 # floaterm
-bindsym $mod+t exec --no-startup-id /home/$USER/.config/i3/scripts/floaterm
+bindsym $mod+t exec --no-startup-id /home/$USER/.config/i3/scripts/floaterm-kitten
 
 # rest-nvim
 bindsym $mod+r exec --no-startup-id /home/$USER/.config/i3/scripts/rest-nvim
@@ -142,7 +142,8 @@ bindsym $mod+a focus parent
 bindsym $mod+shift+a focus child
 
 # changing keyboard layout
-bindsym Mod1+space exec --no-startup-id ~/.config/i3/scripts/layout-switch
+# bindsym Mod1+space exec --no-startup-id ~/.config/i3/scripts/layout-switch
+bindsym $mod+space exec --no-startup-id "setxkbmap -layout 'us,ir' -option 'grp:win_space_toggle'"
 
 # bindsym Mod1+space exec --no-startup-id xkb-switch -n
 
@@ -199,11 +200,11 @@ bindsym $mod+Shift+e mode "exit: [l]ogout, [r]eboot, [s]hutdown, s[u]spend"
 bindsym $mod+Shift+x exec --no-startup-id ~/.config/i3/scripts/powermenu
 
 # change screen temprature
-exec --no-startup-id sct 4500, mode "default"
+# exec --no-startup-id sct 4500, mode "default"
 mode "sct: [d]efault, [m]id, [h]igh" {
-  bindsym d exec --no-startup-id sct, mode "default"
-    bindsym m exec --no-startup-id sct 4500, mode "default"
-    bindsym h exec --no-startup-id sct 3000, mode "default"
+  bindsym d exec --no-startup-id redshift -P -O 6500, mode "default"
+    bindsym m exec --no-startup-id redshift -P -O 4500, mode "default"
+    bindsym h exec --no-startup-id sct 3000, mode "dRfault"
     bindsym Escape mode "default"
     bindsym Return mode "default"
 }
@@ -272,6 +273,8 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/$USER/.config/i3/sc
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xfconf-query --create -c xfce4-session -p /general/LockCommand -t string -s "$LOCKER"
 
+# kwallet
+exec --no-startup-id /usr/lib/pam_kwallet_init
 
 # set powersavings for display:
 # exec --no-startup-id xset s noblank

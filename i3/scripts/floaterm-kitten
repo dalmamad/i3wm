@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# Floating terminal backed by kitty (the "kitten" terminal).
+# Uses --class floaterm so the i3 `for_window [class="floaterm"]` rules
+# (floating, scratchpad, resize, center) apply automatically.
+
+floaterm_win=$(xdotool search --class floaterm)
+fullscreen_status=$(i3-msg -t get_tree | jq 'recurse(.nodes[]?, .floating_nodes[]?) | select(.window_properties?.class == "floaterm") | .fullscreen_mode')
+
+if [ -z "$floaterm_win" ]
+then
+  if tmux has-session -t default 2>/dev/null; then
+    kitty --class floaterm -o font_size=12 tmux attach -t default &
+  else
+    kitty --class floaterm -o font_size=12 tmux new -s default &
+  fi
+else
+
+  if [ "$fullscreen_status" == "1" ]; then
+    i3-msg \[class="floaterm"\] scratchpad show
+    i3-msg \[class="floaterm"\] move position center
+    i3-msg \[class="floaterm"\] fullscreen enable
+  else
+    i3-msg \[class="floaterm"\] scratchpad show
+    i3-msg \[class="floaterm"\] move position center
+  fi
+fi
